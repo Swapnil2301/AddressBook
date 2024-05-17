@@ -1,17 +1,18 @@
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.*;
 public class AddressBook {
         String firstName;
         String lastName;
         String address;
         String city;
         String state;
-        int zip;
-        int phoneNumber;
+        String zip;
+        String phoneNumber;
         String email;
 
 
-        public AddressBook(String firstName, String lastName, String address, String city, String state, int zip, int phoneNumber, String email) {
+        public AddressBook(String firstName, String lastName, String address, String city, String state, String zip, String phoneNumber, String email) {
             this.firstName = firstName;
             this.lastName = lastName;
             this.address = address;
@@ -23,7 +24,6 @@ public class AddressBook {
 
         }
 
-        public static void main(String[] args) {
-            System.out.println("Welome to address book");
-        }
+
+
 }
