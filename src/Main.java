@@ -1,26 +1,40 @@
-import java.util.*;
+import java.util.Scanner;
+
 public class Main {
-    public static void main(String[] args) {
-        Boolean exit = true;
-        while(exit){
-            Scanner sc = new Scanner(System.in);
-        System.out.println("******Welcome to Address Book*******");
+    public static boolean exit = true;
+
+    public static void options() {
+        System.out.println("(1) Create New Contact\n(2) Edit Contact\n(3) Delete Contact\n(4) Display\n(5) Exit");
+        Scanner sc = new Scanner(System.in);
         Contact Swapnil = new Contact();
-        System.out.println("(1) Create New Contact\n(2) Edit Contact\n(3) Display Contact\n(4)Exit");
         int option = sc.nextInt();
-        switch(option){
+
+        switch (option) {
             case 1:
                 Swapnil.addContact();
-                ;
+                break;
             case 2:
                 Swapnil.updateContact();
-                ;
+                break;
             case 3:
-                System.out.println(Swapnil.getInfo());
-                ;
+                Swapnil.deleteInfo();
+                break;
             case 4:
+                System.out.println(Swapnil.getInfo());
+                break;
+            case 5:
                 exit = false;
-            }
+                break;
+            default:
+                System.out.println("Invalid option.");
+                break;
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("******Welcome to Address Book*******");
+        while (exit) {
+            options();
         }
     }
 }
