@@ -1,5 +1,7 @@
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Main {
     static HashMap<String, AddressBook> books = new HashMap<>();
@@ -30,6 +32,18 @@ public class Main {
         }
     }
 
+    public static List<Contact> searchContactsByCity(String city) {
+        return books.values().stream()
+                .flatMap(addressBook -> addressBook.searchByCity(city).stream())
+                .collect(Collectors.toList());
+    }
+
+    public static List<Contact> searchContactsByState(String state) {
+        return books.values().stream()
+                .flatMap(addressBook -> addressBook.searchByState(state).stream())
+                .collect(Collectors.toList());
+    }
+
     public static void menu() {
         System.out.println("Welcome to AddressBook");
         boolean exit = true;
@@ -37,7 +51,9 @@ public class Main {
             System.out.println("\n1. Add New AddressBook");
             System.out.println("2. Perform Operation in AddressBook");
             System.out.println("3. Print Available AddressBooks");
-            System.out.println("4. Exit");
+            System.out.println("4. Search Contacts by City");
+            System.out.println("5. Search Contacts by State");
+            System.out.println("6. Exit");
             System.out.println("Enter a choice: ");
             int choice = sc.nextInt();
             sc.nextLine(); // consume newline
@@ -56,6 +72,20 @@ public class Main {
                     listAddressBooks();
                     break;
                 case 4:
+                    System.out.println("Enter the city to search for contacts: ");
+                    String city = sc.nextLine();
+                    List<Contact> contactsByCity = searchContactsByCity(city);
+                    System.out.println("Contacts in " + city + ":");
+                    contactsByCity.forEach(System.out::println);
+                    break;
+                case 5:
+                    System.out.println("Enter the state to search for contacts: ");
+                    String state = sc.nextLine();
+                    List<Contact> contactsByState = searchContactsByState(state);
+                    System.out.println("Contacts in " + state + ":");
+                    contactsByState.forEach(System.out::println);
+                    break;
+                case 6:
                     exit = false;
                     break;
                 default:
