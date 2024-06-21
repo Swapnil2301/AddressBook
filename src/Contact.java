@@ -1,6 +1,6 @@
-import java.util.HashMap;
+import java.util.Objects;
 
-public class Contact{
+public class Contact {
     String firstName;
     String lastName;
     String address;
@@ -9,33 +9,31 @@ public class Contact{
     String zip;
     String phNumber;
     String email;
-    String contactId;
 
-    public Contact(String firstName,String lastName,String address,String city,String state,String zip,String phNumber,String email ){
-        this.firstName=firstName;
-        this.lastName=lastName;
-        this.address=address;
-        this.city=city;
-        this.state=state;
-        this.zip=zip;
-        this.phNumber=phNumber;
-        this.email=email;
-        
+    public Contact(String firstName, String lastName, String address, String city, String state, String zip, String phNumber, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.phNumber = phNumber;
+        this.email = email;
     }
-
 
     @Override
     public String toString() {
         return "Contact{" +
-                "  Name= '" + firstName +" "+lastName+  '\'' +
-                ", PhoneNumber= '" + phNumber + '\'' +
-                ", Email= '" + email + '\'' +
-                ", Address= '"+address + '\'' +
-                ", City= '"+ city +'\'' +
-                ", State= '"+ state + '\'' +
-                ", Zip= '"+ zip + '\'' +
-
-
+                "Name='" + firstName + " " + lastName + '\'' +
+                ", PhoneNumber='" + phNumber + '\'' +
+                ", Email='" + email + '\'' +
+                ", Address='" + address + '\'' +
+                ", City='" + city + '\'' +
+                ", State='" + state + '\'' +
+                ", Zip='" + zip + '\'' +
                 '}';
     }
 }
+
+
+
