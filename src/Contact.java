@@ -33,6 +33,7 @@ public class Contact {
                 ", Zip='" + zip + '\'' +
                 '}';
     }
+
 }
 
 
