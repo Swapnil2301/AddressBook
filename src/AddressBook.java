@@ -1,20 +1,23 @@
+import java.util.*;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.Scanner;
+
 public class AddressBook {
-    private final List<Contact> contacts;
+    private List<Contact> contacts;
 
     public AddressBook() {
         contacts = new ArrayList<>();
     }
 
-    public void addContact(Contact contact) {
+    public boolean addContact(Contact contact) {
         if (isDuplicate(contact)) {
             System.out.println("Duplicate entry found for: " + contact.firstName + " " + contact.lastName);
+            return false;
         } else {
             contacts.add(contact);
             System.out.println("Contact added: " + contact.firstName + " " + contact.lastName);
+            return true;
         }
     }
 
@@ -48,6 +51,16 @@ public class AddressBook {
         return contacts.stream()
                 .filter(contact -> contact.state.equalsIgnoreCase(state))
                 .collect(Collectors.toList());
+    }
+
+    public Map<String, List<Contact>> groupByCity() {
+        return contacts.stream()
+                .collect(Collectors.groupingBy(contact -> contact.city));
+    }
+
+    public Map<String, List<Contact>> groupByState() {
+        return contacts.stream()
+                .collect(Collectors.groupingBy(contact -> contact.state));
     }
 
     public static void addressBookMenu(AddressBook addressBook) {
@@ -119,8 +132,10 @@ public class AddressBook {
             }
         }
 
+        scanner.close();
     }
 
     public static void main(String[] args) {
+        // Main method left empty as this class does not require a standalone main method
     }
 }

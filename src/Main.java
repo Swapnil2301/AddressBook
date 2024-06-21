@@ -1,5 +1,6 @@
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -44,6 +45,24 @@ public class Main {
                 .collect(Collectors.toList());
     }
 
+    public static Map<String, List<Contact>> groupContactsByCity() {
+        return books.values().stream()
+                .flatMap(addressBook -> addressBook.groupByCity().entrySet().stream())
+                .collect(Collectors.groupingBy(
+                        Map.Entry::getKey,
+                        Collectors.flatMapping(entry -> entry.getValue().stream(), Collectors.toList())
+                ));
+    }
+
+    public static Map<String, List<Contact>> groupContactsByState() {
+        return books.values().stream()
+                .flatMap(addressBook -> addressBook.groupByState().entrySet().stream())
+                .collect(Collectors.groupingBy(
+                        Map.Entry::getKey,
+                        Collectors.flatMapping(entry -> entry.getValue().stream(), Collectors.toList())
+                ));
+    }
+
     public static void menu() {
         System.out.println("Welcome to AddressBook");
         boolean exit = true;
@@ -53,7 +72,9 @@ public class Main {
             System.out.println("3. Print Available AddressBooks");
             System.out.println("4. Search Contacts by City");
             System.out.println("5. Search Contacts by State");
-            System.out.println("6. Exit");
+            System.out.println("6. View Contacts by City");
+            System.out.println("7. View Contacts by State");
+            System.out.println("8. Exit");
             System.out.println("Enter a choice: ");
             int choice = sc.nextInt();
             sc.nextLine(); // consume newline
@@ -86,6 +107,21 @@ public class Main {
                     contactsByState.forEach(System.out::println);
                     break;
                 case 6:
+                    Map<String, List<Contact>> cityGroups = groupContactsByCity();
+                    cityGroups.forEach((cityName, contacts) -> {
+                        System.out.println("City: " + cityName);
+                                        contacts.forEach(System.out::println);
+                    });
+                    break;
+                case 7:
+
+                    Map<String, List<Contact>> stateGroups = groupContactsByState();
+                    stateGroups.forEach((stateName, contacts) -> {
+                        System.out.println("State: " + stateName);
+                        contacts.forEach(System.out::println);
+                    });
+                    break;
+                case 8:
                     exit = false;
                     break;
                 default:
